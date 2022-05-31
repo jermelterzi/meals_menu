@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meals/pages/categories_page.dart';
+import 'package:meals/pages/meals_page.dart';
+import 'package:meals/utils/app_routes.dart';
 
 void main() => runApp(const MyApp());
 
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Vamos cozinhar?',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink)
             .copyWith(secondary: Colors.amber),
         fontFamily: 'Raleway',
         canvasColor: const Color.fromRGBO(255, 254, 229, 1),
@@ -23,7 +25,10 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: const CategoriesPage(),
+      routes: {
+        AppRoutes.HOME: (ctx) => const CategoriesPage(),
+        AppRoutes.MEALS_PAGE: (ctx) => MealsPage(),
+      },
     );
   }
 }
