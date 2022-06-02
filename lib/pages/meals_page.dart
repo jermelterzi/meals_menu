@@ -4,7 +4,7 @@ import 'package:meals/data/dummy_data.dart';
 import 'package:meals/models/category.dart';
 
 class MealsPage extends StatelessWidget {
-  MealsPage({Key? key}) : super(key: key);
+  const MealsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
