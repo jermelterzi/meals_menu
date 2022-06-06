@@ -3,14 +3,23 @@ import 'package:meals/components/main_drawer.dart';
 import 'package:meals/models/settings.dart';
 
 class ConfigPage extends StatefulWidget {
-  const ConfigPage({Key? key}) : super(key: key);
+  const ConfigPage({Key? key, required this.onSettingsChanged, required this.settings}) : super(key: key);
+
+  final Function(Settings) onSettingsChanged;
+  final Settings settings;
 
   @override
   State<ConfigPage> createState() => _ConfigPageState();
 }
 
 class _ConfigPageState extends State<ConfigPage> {
-  Settings settings = Settings();
+  late Settings settings;
+
+  @override
+  void initState() {
+    super.initState();
+    settings = widget.settings;
+  }
 
   _createSwitch(
     String title,
@@ -20,7 +29,10 @@ class _ConfigPageState extends State<ConfigPage> {
   ) {
     return SwitchListTile.adaptive(
       value: value,
-      onChanged: onChanged,
+      onChanged: (value) {
+        onChanged(value);
+        widget.onSettingsChanged(settings);
+      },
       title: Text(title),
       subtitle: Text(subtitle),
     );
