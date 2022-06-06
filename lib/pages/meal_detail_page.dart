@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import '../models/meal.dart';
 
 class MealDetailPage extends StatelessWidget {
-  const MealDetailPage({Key? key, required this.onToggleFavorite}) : super(key: key);
+  const MealDetailPage(
+      {Key? key, required this.onToggleFavorite, required this.isFavorite})
+      : super(key: key);
 
   final Function(Meal) onToggleFavorite;
+  final bool Function(Meal) isFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -75,9 +78,7 @@ class MealDetailPage extends StatelessWidget {
         onPressed: () {
           onToggleFavorite(meal);
         },
-        child: const Icon(
-          Icons.star,
-        ),
+        child: Icon(isFavorite(meal) ? Icons.star : Icons.star_border),
       ),
     );
   }
