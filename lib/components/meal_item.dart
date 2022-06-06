@@ -104,6 +104,7 @@ class MealItem extends StatelessWidget {
                 ],
               ),
             )
+
           ],
         ),
       ),

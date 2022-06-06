@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         AppRoutes.HOME: (ctx) => const TabsPage(),
-        AppRoutes.MEALS_PAGE: (ctx) => MealsPage(),
+        AppRoutes.MEALS_PAGE: (ctx) => const MealsPage(),
         AppRoutes.MEAL_DETAIL: (ctx) => const MealDetailPage(),
         AppRoutes.CONFIG_PAGE: (ctx) => const ConfigPage(),
       },
