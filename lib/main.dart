@@ -20,6 +20,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   List<Meal> _availableMeals = dummyMeals;
+  List<Meal> _favoriteMeals = [];
   Settings settings = Settings();
 
   void _filterMeals(Settings settings) {
@@ -31,8 +32,19 @@ class _MyAppState extends State<MyApp> {
         final filterLactose = settings.isLactoseFree && !meal.isLactoseFree;
         final filterVegan = settings.isVegan && !meal.isVegan;
         final filterVegetarian = settings.isVegetarian && !meal.isVegetarian;
-        return !filterGluten && !filterLactose && !filterVegan && !filterVegetarian;
+        return !filterGluten &&
+            !filterLactose &&
+            !filterVegan &&
+            !filterVegetarian;
       }).toList();
+    });
+  }
+
+  void _toggleFavorite(Meal meal) {
+    setState(() {
+      _favoriteMeals.contains(meal)
+          ? _favoriteMeals.remove(meal)
+          : _favoriteMeals.add(meal);
     });
   }
 
@@ -54,10 +66,15 @@ class _MyAppState extends State<MyApp> {
             ),
       ),
       routes: {
-        AppRoutes.HOME: (ctx) => const TabsPage(),
+        AppRoutes.HOME: (ctx) => TabsPage(
+              favoriteMeals: _favoriteMeals,
+            ),
         AppRoutes.MEALS_PAGE: (ctx) => MealsPage(_availableMeals),
-        AppRoutes.MEAL_DETAIL: (ctx) => const MealDetailPage(),
-        AppRoutes.CONFIG_PAGE: (ctx) => ConfigPage(onSettingsChanged: _filterMeals, settings: settings,),
+        AppRoutes.MEAL_DETAIL: (ctx) => MealDetailPage(onToggleFavorite: _toggleFavorite,),
+        AppRoutes.CONFIG_PAGE: (ctx) => ConfigPage(
+              onSettingsChanged: _filterMeals,
+              settings: settings,
+            ),
       },
       // onGenerateRoute: ,
       onUnknownRoute: (settings) {

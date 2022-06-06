@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../models/meal.dart';
 
 class MealDetailPage extends StatelessWidget {
-  const MealDetailPage({Key? key}) : super(key: key);
+  const MealDetailPage({Key? key, required this.onToggleFavorite}) : super(key: key);
+
+  final Function(Meal) onToggleFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +73,7 @@ class MealDetailPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pop(meal.title);
+          onToggleFavorite(meal);
         },
         child: const Icon(
           Icons.star,
